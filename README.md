@@ -1,66 +1,67 @@
-# 🍞 Welcome to Bun + Svelte Magic! 🚀🔥
+# ⚡ svelte + Bun = Turbocharged Svelte ⚡
 
-Everything you need to build a blazing-fast Svelte project, powered by [`Bun`](https://bun.sh/) ⚡. Say goodbye to slow installs and hello to speed! 🏎️💨
+Welcome to the era of ultra-fast development with [`svelte`](https://github.com/sveltejs/cli) and [`Bun`](https://bun.sh/) 🚀. Everything you need to build a Svelte project effortlessly and with style!
 
-## 🛠️ Creating a project
+---
 
-Getting started is a breeze! Just run:
+## 🎨 Rekit - Your Essential Svelte Components
+
+Need ready-to-use components for your project or SaaS? **Rekit** has got you covered!
+
+🔹 **Customizable components** to speed up your workflow.
+🔹 **Easy integration** with your `sv` projects.
+🔹 **Perfect for MVPs and products in development**.
+
+Use Rekit to quickly add UI blocks, widgets, and interactive elements to your Svelte app without starting from scratch!
+
+---
+
+## 🚀 Creating a Project
+
+If you're reading this, you've probably already completed this step. Congrats! 🎉
 
 ```bash
 # create a new project in the current directory
-bun create sveltekit .
+bun create sv
 
-# or create a new project in my-app
-bun create sveltekit my-app
+# create a new project in the my-app directory
+bun create sv my-app
 ```
 
-## 🎯 Developing
+---
 
-Once your project is set up, install dependencies with the turbocharged Bun:
+## 💻 Developing
+
+Once your project is set up and dependencies installed with `bun install`, start an ultra-fast development server:
 
 ```bash
-bun install
+bun dev
+
+# or open directly in your browser
+bun dev --open
 ```
 
-Then, fire up the dev server with hot reloading magic 🔥:
+💡 **Tip:** Bun is so fast, you might not even notice the build time! ⚡
 
-```bash
-bun run dev
+---
 
-# or start the server and open the app in a new browser tab
-bun run dev -- --open
-```
+## 🏗️ Build & Preview
 
-### ✨ Instant Component Reloading
-
-No more waiting for slow refreshes! Bun + Svelte ensures:
-- 🔄 **Instant UI updates** when modifying components.
-- 🛠️ **Live reloading** for a seamless dev experience.
-- 🚀 **Optimized performance** with ultra-fast compiles.
-
-## 🏗️ Building for Production
-
-Ready to ship your app? Generate an optimized production build:
+Prepare your app for production with top-notch optimizations:
 
 ```bash
 bun run build
 ```
 
-You can preview the production build before deployment:
+Then preview your build with:
 
 ```bash
 bun run preview
 ```
 
-> 💡 **Pro Tip:** To deploy your app, make sure to install the right [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+> To deploy your app, you might need an [adapter](https://svelte.dev/docs/kit/adapters) depending on your target environment.
 
-## 🎨 Extra Goodies
+---
 
-- 🚀 **Supercharged speed** – Bun makes everything crazy fast! 🏎️
-- 🛠️ **Effortless setup** – No complicated config, just code.
-- 🎭 **Live component editing** – See changes instantly.
-- 🏋️ **Lightweight & powerful** – Built for performance.
+🚀 **Ready to build the future with sv, Bun, and Rekit?** Let's goooo! 🎉🔥
 
-## 🚀 Join the Future
-
-Ditch the slow, embrace the speed. Bun + Svelte is the ultimate dev experience! 🦾🔥
