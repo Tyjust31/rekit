@@ -14,6 +14,44 @@
       setTimeout(() => showComponentsSection = true, 800);
     });
   </script>
+   <main>
+    <div class="container">
+      <!-- Titre principal -->
+      <h1 class="title {showTitle ? 'show' : ''}">Build Faster with Reusable Svelte Components</h1>
+  
+      <!-- Description -->
+      <p class="description {showDescription ? 'show' : ''}">
+        Share, customize, and integrate powerful Svelte components to accelerate your SaaS development.
+        Join a community of developers building the future.
+      </p>
+  
+      <!-- Bouton CTA -->
+      <a href="/docs" class="cta-button {showCtaButton ? 'show' : ''}">Explore the Documentation</a>
+  
+      <!-- Section des composants -->
+      <div class="components-section {showComponentsSection ? 'show' : ''}">
+        <h2>Featured Components</h2>
+        <div class="components-grid">
+          <div class="component-card">
+            <h3>Responsive Navbar</h3>
+            <p>A fully customizable navbar with dropdowns and mobile support.</p>
+          </div>
+          <div class="component-card">
+            <h3>Data Table</h3>
+            <p>Sort, filter, and paginate your data with ease.</p>
+          </div>
+          <div class="component-card">
+            <h3>Auth Forms</h3>
+            <p>Pre-built login and registration forms with validation.</p>
+          </div>
+          <div class="component-card">
+            <h3>Dashboard Cards</h3>
+            <p>Beautiful cards for displaying metrics and analytics.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
   
   <style>
     main {
@@ -106,42 +144,4 @@
     }
   </style>
   
-  <main>
-    <div class="container">
-      <!-- Titre principal -->
-      <h1 class="title {showTitle ? 'show' : ''}">Build Faster with Reusable Svelte Components</h1>
-  
-      <!-- Description -->
-      <p class="description {showDescription ? 'show' : ''}">
-        Share, customize, and integrate powerful Svelte components to accelerate your SaaS development.
-        Join a community of developers building the future.
-      </p>
-  
-      <!-- Bouton CTA -->
-      <a href="/docs" class="cta-button {showCtaButton ? 'show' : ''}">Explore the Documentation</a>
-  
-      <!-- Section des composants -->
-      <div class="components-section {showComponentsSection ? 'show' : ''}">
-        <h2>Featured Components</h2>
-        <div class="components-grid">
-          <div class="component-card">
-            <h3>Responsive Navbar</h3>
-            <p>A fully customizable navbar with dropdowns and mobile support.</p>
-          </div>
-          <div class="component-card">
-            <h3>Data Table</h3>
-            <p>Sort, filter, and paginate your data with ease.</p>
-          </div>
-          <div class="component-card">
-            <h3>Auth Forms</h3>
-            <p>Pre-built login and registration forms with validation.</p>
-          </div>
-          <div class="component-card">
-            <h3>Dashboard Cards</h3>
-            <p>Beautiful cards for displaying metrics and analytics.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
-  
+ 
