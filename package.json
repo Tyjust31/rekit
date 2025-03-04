@@ -38,6 +38,7 @@
     "vite": "^6.0.0"
   },
   "dependencies": {
+    "@sveltejs/adapter-vercel": "^5.6.3",
     "papaparse": "^5.5.2",
     "prismjs": "^1.29.0"
   }
