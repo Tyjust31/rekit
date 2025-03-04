@@ -4,7 +4,7 @@
 <svelte:head>
   
 <title>redkit</title>
-<meta name="robots" content="redkit svelte component" />
+<meta name="robots" content="redkit svelte component for help you for your project" />
 
 </svelte:head>
 <main>
