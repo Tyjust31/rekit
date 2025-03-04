@@ -9,6 +9,8 @@ const config = {
 	preprocess: vitePreprocess(),
 
 	kit: {
+		outDir: 'build', // Spécifiez le répertoire de sortie
+
 		adapter: adapter()
 	}
 };
