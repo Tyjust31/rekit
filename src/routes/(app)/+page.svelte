@@ -1,12 +1,9 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 
-  // --- SVELTE 5 RUNES ---
-  // On utilise une seule rune pour piloter l'entrée en cascade via CSS
   let isVisible = $state(false);
 
   onMount(() => {
-    // Un léger délai pour s'assurer que le layout est prêt
     setTimeout(() => isVisible = true, 100);
   });
 </script>
@@ -58,16 +55,22 @@
 </div>
 
 <style lang="scss">
-  // On récupère les variables du layout
   $primary: #ff3e00;
   $text-dim: #a1a1aa;
   $glass: rgba(255, 255, 255, 0.03);
   $glass-border: rgba(255, 255, 255, 0.08);
 
+  // Breakpoints
+  $bp-sm: 480px;
+  $bp-md: 768px;
+
   .hero-page {
     opacity: 0;
     transform: translateY(20px);
     transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    padding: 0 1.5rem;
+
+    @media (max-width: $bp-sm) { padding: 0 1.25rem; }
     
     &.isVisible {
       opacity: 1;
@@ -80,6 +83,8 @@
     margin: 0 auto;
     text-align: center;
     padding-top: 2rem;
+
+    @media (max-width: $bp-sm) { padding-top: 1.25rem; }
   }
 
   .badge {
@@ -94,15 +99,30 @@
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 2rem;
+
+    @media (max-width: $bp-sm) {
+      font-size: 0.65rem;
+      padding: 0.4rem 0.85rem;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.5px;
+    }
   }
 
   .title {
-    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-size: clamp(2rem, 8vw, 4rem);
     font-weight: 800;
     line-height: 1.1;
     margin-bottom: 1.5rem;
     letter-spacing: -2px;
     color: aliceblue;
+
+    @media (max-width: $bp-md) { letter-spacing: -1px; }
+    @media (max-width: $bp-sm) {
+      font-size: clamp(1.75rem, 9vw, 2.5rem);
+      letter-spacing: -0.5px;
+      margin-bottom: 1.25rem;
+    }
+
     .gradient-text {
       background: linear-gradient(to right, $primary, #ff8a00);
       -webkit-background-clip: text;
@@ -116,6 +136,20 @@
     max-width: 650px;
     margin: 0 auto 3rem;
     line-height: 1.6;
+
+    @media (max-width: $bp-md) { font-size: 1.05rem; margin-bottom: 2.5rem; }
+    @media (max-width: $bp-sm) {
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+      line-height: 1.55;
+    }
+  }
+
+  .cta-wrapper {
+    @media (max-width: $bp-sm) {
+      display: flex;
+      justify-content: center;
+    }
   }
 
   .cta-button {
@@ -131,23 +165,57 @@
     transition: all 0.3s;
     box-shadow: 0 10px 30px rgba($primary, 0.3);
 
+    @media (max-width: $bp-md) { padding: 0.9rem 1.75rem; }
+    @media (max-width: $bp-sm) {
+      padding: 0.85rem 1.5rem;
+      font-size: 0.9rem;
+      gap: 8px;
+      width: 100%;
+      max-width: 320px;
+      justify-content: center;
+
+      svg { width: 18px; height: 18px; flex-shrink: 0; }
+    }
+
     &:hover {
       transform: translateY(-3px) scale(1.02);
       box-shadow: 0 15px 40px rgba($primary, 0.4);
+    }
+
+    // Évite le scale sur mobile (tap feels odd)
+    @media (hover: none) {
+      &:hover { transform: none; }
+      &:active { opacity: 0.85; transform: scale(0.98); }
     }
   }
 
   // --- SECTION COMPOSANTS ---
   .components-section {
     margin-top: 6rem;
+
+    @media (max-width: $bp-md) { margin-top: 4rem; }
+    @media (max-width: $bp-sm) { margin-top: 3rem; }
     
     .section-header {
       display: flex;
       align-items: center;
       gap: 2rem;
       margin-bottom: 3rem;
+
+      @media (max-width: $bp-md) { gap: 1.25rem; margin-bottom: 2rem; }
+      @media (max-width: $bp-sm) {
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        // Cache les lignes déco sur très petit écran pour éviter l'écrasement du titre
+        .line { display: none; }
+      }
       
-      h2 { font-size: 1.25rem; color: white; white-space: nowrap; }
+      h2 {
+        font-size: 1.25rem;
+        color: white;
+        white-space: nowrap;
+        @media (max-width: $bp-sm) { font-size: 1.05rem; width: 100%; text-align: center; }
+      }
       .line { flex: 1; height: 1px; background: $glass-border; }
     }
   }
@@ -156,6 +224,15 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 1.5rem;
+
+    @media (max-width: $bp-md) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    @media (max-width: $bp-sm) {
+      grid-template-columns: 1fr;
+      gap: 0.875rem;
+    }
   }
 
   .component-card {
@@ -168,10 +245,20 @@
     backdrop-filter: blur(10px);
     transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
     overflow: hidden;
-
-    // Animation d'entrée gérée par le délai en ligne (JS)
     opacity: 0;
     transform: translateY(30px);
+
+    @media (max-width: $bp-md) { padding: 1.75rem; border-radius: 20px; }
+    @media (max-width: $bp-sm) {
+      padding: 1.5rem;
+      border-radius: 16px;
+      // Affichage horizontal sur mobile pour compacité
+      display: grid;
+      grid-template-columns: auto 1fr;
+      grid-template-rows: auto auto;
+      column-gap: 1rem;
+      align-items: start;
+    }
 
     .isVisible & {
       opacity: 1;
@@ -182,8 +269,11 @@
       background: rgba(255, 255, 255, 0.07);
       border-color: rgba($primary, 0.3);
       transform: translateY(-10px);
-
       .card-glow { opacity: 1; }
+    }
+
+    @media (hover: none) {
+      &:hover { transform: none; }
     }
 
     .card-glow {
@@ -197,6 +287,15 @@
     .icon-box {
       font-size: 2rem;
       margin-bottom: 1rem;
+
+      @media (max-width: $bp-sm) {
+        font-size: 1.75rem;
+        margin-bottom: 0;
+        grid-row: span 2;
+        display: flex;
+        align-items: center;
+        padding-top: 2px;
+      }
     }
 
     h3 {
@@ -204,17 +303,19 @@
       font-weight: 700;
       margin-bottom: 0.5rem;
       color: white;
+
+      @media (max-width: $bp-sm) {
+        font-size: 1rem;
+        margin-bottom: 0.3rem;
+      }
     }
 
     p {
       font-size: 0.9rem;
       color: $text-dim;
       line-height: 1.5;
-    }
-  }
 
-  @media (max-width: 640px) {
-    .title { font-size: 2.5rem; }
-    .description { font-size: 1rem; }
+      @media (max-width: $bp-sm) { font-size: 0.85rem; }
+    }
   }
 </style>
