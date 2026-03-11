@@ -88,8 +88,8 @@
     padding: 2rem 2rem 0;
     text-align: center;
 
-    @media (max-width: $bp-md) { padding: 2rem 1.5rem 0; }
-    @media (max-width: $bp-sm) { padding: 1.5rem 1.25rem 0; }
+    @media (max-width: $bp-md) { padding: 2rem 1.5rem 0  0; }
+    @media (max-width: $bp-sm) { padding: 1.5rem 1.25rem 0 0 ; }
   }
 
   .badge {
