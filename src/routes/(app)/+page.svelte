@@ -60,31 +60,36 @@
   $glass: rgba(255, 255, 255, 0.03);
   $glass-border: rgba(255, 255, 255, 0.08);
 
-  // Breakpoints
   $bp-sm: 480px;
   $bp-md: 768px;
 
+  // ── WRAPPER : aucun padding, juste l'animation d'entrée ──────────
   .hero-page {
+    width: 100%;
     opacity: 0;
     transform: translateY(20px);
-    transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-    padding: 0 1.5rem;
+    transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
+                transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
 
-    @media (max-width: $bp-sm) { padding: 0 1.25rem; }
-    
     &.isVisible {
       opacity: 1;
       transform: translateY(0);
     }
   }
 
+  // ── CONTAINER : seul responsable du centrage et du padding ───────
   .container {
+    width: 100%;
     max-width: 1000px;
-    margin: 0 auto;
+    // margin-inline: auto = centrage horizontal dans tous les contextes
+    margin-inline: auto;
+    box-sizing: border-box;
+    // Le padding horizontal vit ici, une seule source de vérité
+    padding: 2rem 2rem 0;
     text-align: center;
-    padding-top: 2rem;
 
-    @media (max-width: $bp-sm) { padding-top: 1.25rem; }
+    @media (max-width: $bp-md) { padding: 2rem 1.5rem 0; }
+    @media (max-width: $bp-sm) { padding: 1.5rem 1.25rem 0; }
   }
 
   .badge {
@@ -109,19 +114,17 @@
   }
 
   .title {
-    font-size: clamp(2rem, 8vw, 4rem);
+    font-size: clamp(1.875rem, 6vw, 4rem);
     font-weight: 800;
     line-height: 1.1;
-    margin-bottom: 1.5rem;
+    // margin auto sur les côtés pour forcer le centrage du bloc texte
+    margin: 0 auto 1.5rem;
     letter-spacing: -2px;
     color: aliceblue;
+    max-width: 900px;
 
     @media (max-width: $bp-md) { letter-spacing: -1px; }
-    @media (max-width: $bp-sm) {
-      font-size: clamp(1.75rem, 9vw, 2.5rem);
-      letter-spacing: -0.5px;
-      margin-bottom: 1.25rem;
-    }
+    @media (max-width: $bp-sm) { letter-spacing: -0.5px; margin-bottom: 1.25rem; }
 
     .gradient-text {
       background: linear-gradient(to right, $primary, #ff8a00);
@@ -131,30 +134,28 @@
   }
 
   .description {
-    font-size: 1.15rem;
+    font-size: clamp(0.9rem, 2.5vw, 1.15rem);
     color: $text-dim;
-    max-width: 650px;
+    max-width: 620px;
+    // margin auto = centrage du paragraphe garanti
     margin: 0 auto 3rem;
-    line-height: 1.6;
+    line-height: 1.65;
 
-    @media (max-width: $bp-md) { font-size: 1.05rem; margin-bottom: 2.5rem; }
-    @media (max-width: $bp-sm) {
-      font-size: 0.95rem;
-      margin-bottom: 2rem;
-      line-height: 1.55;
-    }
+    @media (max-width: $bp-md) { margin-bottom: 2.5rem; }
+    @media (max-width: $bp-sm) { margin-bottom: 2rem; }
   }
 
+  // ── CTA : flex centré systématiquement ───────────────────────────
   .cta-wrapper {
-    @media (max-width: $bp-sm) {
-      display: flex;
-      justify-content: center;
-    }
+    display: flex;
+    justify-content: center;
+    width: 100%;
   }
 
   .cta-button {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 12px;
     background: $primary;
     color: white;
@@ -162,18 +163,16 @@
     border-radius: 12px;
     font-weight: 700;
     text-decoration: none;
-    transition: all 0.3s;
+    transition: transform 0.3s, box-shadow 0.3s;
     box-shadow: 0 10px 30px rgba($primary, 0.3);
+    white-space: nowrap;
 
-    @media (max-width: $bp-md) { padding: 0.9rem 1.75rem; }
+    @media (max-width: $bp-md) { padding: 0.9rem 1.75rem; font-size: 0.95rem; }
     @media (max-width: $bp-sm) {
-      padding: 0.85rem 1.5rem;
+      width: min(100%, 340px);
+      padding: 0.875rem 1.5rem;
       font-size: 0.9rem;
       gap: 8px;
-      width: 100%;
-      max-width: 320px;
-      justify-content: center;
-
       svg { width: 18px; height: 18px; flex-shrink: 0; }
     }
 
@@ -181,58 +180,47 @@
       transform: translateY(-3px) scale(1.02);
       box-shadow: 0 15px 40px rgba($primary, 0.4);
     }
-
-    // Évite le scale sur mobile (tap feels odd)
     @media (hover: none) {
-      &:hover { transform: none; }
+      &:hover { transform: none; box-shadow: 0 10px 30px rgba($primary, 0.3); }
       &:active { opacity: 0.85; transform: scale(0.98); }
     }
   }
 
-  // --- SECTION COMPOSANTS ---
   .components-section {
     margin-top: 6rem;
-
     @media (max-width: $bp-md) { margin-top: 4rem; }
     @media (max-width: $bp-sm) { margin-top: 3rem; }
-    
+
     .section-header {
       display: flex;
       align-items: center;
-      gap: 2rem;
+      gap: 1.5rem;
       margin-bottom: 3rem;
 
       @media (max-width: $bp-md) { gap: 1.25rem; margin-bottom: 2rem; }
-      @media (max-width: $bp-sm) {
-        gap: 1rem;
-        margin-bottom: 1.5rem;
-        // Cache les lignes déco sur très petit écran pour éviter l'écrasement du titre
-        .line { display: none; }
-      }
-      
+      @media (max-width: $bp-sm) { margin-bottom: 1.5rem; }
+
       h2 {
-        font-size: 1.25rem;
+        font-size: 1.1rem;
         color: white;
         white-space: nowrap;
-        @media (max-width: $bp-sm) { font-size: 1.05rem; width: 100%; text-align: center; }
+        margin: 0;
+        @media (max-width: $bp-sm) { width: 100%; text-align: center; font-size: 1rem; }
       }
-      .line { flex: 1; height: 1px; background: $glass-border; }
+      .line {
+        flex: 1; height: 1px; background: $glass-border;
+        @media (max-width: $bp-sm) { display: none; }
+      }
     }
   }
 
   .components-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 
-    @media (max-width: $bp-md) {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
-    }
-    @media (max-width: $bp-sm) {
-      grid-template-columns: 1fr;
-      gap: 0.875rem;
-    }
+    @media (max-width: $bp-md) { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    @media (max-width: $bp-sm) { grid-template-columns: 1fr; gap: 0.875rem; }
   }
 
   .component-card {
@@ -243,79 +231,64 @@
     border-radius: 24px;
     text-align: left;
     backdrop-filter: blur(10px);
-    transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
     overflow: hidden;
     opacity: 0;
     transform: translateY(30px);
+    transition: opacity 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
+                transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
+                background 0.3s, border-color 0.3s;
 
     @media (max-width: $bp-md) { padding: 1.75rem; border-radius: 20px; }
     @media (max-width: $bp-sm) {
-      padding: 1.5rem;
+      padding: 1.25rem 1.5rem;
       border-radius: 16px;
-      // Affichage horizontal sur mobile pour compacité
       display: grid;
-      grid-template-columns: auto 1fr;
+      grid-template-columns: 2.5rem 1fr;
       grid-template-rows: auto auto;
       column-gap: 1rem;
+      row-gap: 0.2rem;
       align-items: start;
     }
 
-    .isVisible & {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .isVisible & { opacity: 1; transform: translateY(0); }
 
     &:hover {
       background: rgba(255, 255, 255, 0.07);
       border-color: rgba($primary, 0.3);
-      transform: translateY(-10px);
+      transform: translateY(-8px);
       .card-glow { opacity: 1; }
     }
-
-    @media (hover: none) {
-      &:hover { transform: none; }
-    }
+    @media (hover: none) { &:hover { transform: none; } }
 
     .card-glow {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
+      position: absolute; inset: 0; pointer-events: none;
       background: radial-gradient(circle at top right, rgba($primary, 0.1), transparent);
-      opacity: 0;
-      transition: opacity 0.5s;
+      opacity: 0; transition: opacity 0.5s;
     }
 
     .icon-box {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-
+      font-size: 2rem; margin-bottom: 1rem; line-height: 1;
       @media (max-width: $bp-sm) {
-        font-size: 1.75rem;
-        margin-bottom: 0;
-        grid-row: span 2;
-        display: flex;
-        align-items: center;
-        padding-top: 2px;
+        font-size: 1.6rem; margin-bottom: 0;
+        grid-column: 1; grid-row: 1 / span 2;
+        display: flex; align-items: center; justify-content: center;
       }
     }
 
     h3 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      color: white;
-
+      font-size: 1.1rem; font-weight: 700; margin: 0 0 0.5rem; color: white;
       @media (max-width: $bp-sm) {
-        font-size: 1rem;
-        margin-bottom: 0.3rem;
+        font-size: 0.975rem; margin-bottom: 0.25rem;
+        grid-column: 2; grid-row: 1;
       }
     }
 
     p {
-      font-size: 0.9rem;
-      color: $text-dim;
-      line-height: 1.5;
-
-      @media (max-width: $bp-sm) { font-size: 0.85rem; }
+      font-size: 0.9rem; color: $text-dim; line-height: 1.5; margin: 0;
+      @media (max-width: $bp-sm) {
+        font-size: 0.825rem;
+        grid-column: 2; grid-row: 2;
+      }
     }
   }
 </style>
